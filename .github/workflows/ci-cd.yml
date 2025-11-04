@@ -142,7 +142,7 @@ jobs:
           push: true
           tags: ${{ env.IMAGE_NAME }}:${{ env.SELECTED_TAG }}
 
-  # deploy to development
+    # deploy to development
   deploy-dev:
     needs: docker-ci
     uses: ./.github/workflows/deploy-kind.yml
@@ -153,7 +153,7 @@ jobs:
       release_name: todoapp
       namespace: todo-dev
       cluster_config: workspace/cluster.yml
-      image_name: ${{ env.IMAGE_NAME }}
+      image_name: "vitalysemeniv/todoapp"
       image_tag: ${{ github.event_name == 'workflow_dispatch' && inputs.image_tag || github.sha }}
       tested_artifact: tested-src-${{ github.event_name == 'workflow_dispatch' && inputs.matrix_artifact || 'ubuntu-3.9' }}-${{ github.sha }}
     secrets: inherit
@@ -169,7 +169,7 @@ jobs:
       release_name: todoapp
       namespace: todo-staging
       cluster_config: workspace/cluster.yml
-      image_name: ${{ env.IMAGE_NAME }}
+      image_name: "vitalysemeniv/todoapp"
       image_tag: ${{ github.event_name == 'workflow_dispatch' && inputs.image_tag || github.sha }}
       tested_artifact: tested-src-${{ github.event_name == 'workflow_dispatch' && inputs.matrix_artifact || 'ubuntu-3.9' }}-${{ github.sha }}
     secrets: inherit
